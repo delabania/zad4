@@ -22,7 +22,7 @@ public:
 		return _attackPower;
 	}
 	void takeDamage(T damage) {
-		_health -= std::min(damage, _health);
+		_health = std::max(_health - damage, 0);
 	}
 	// valueType - cos z decltype? 
 };
@@ -51,6 +51,7 @@ public:
 template <typename M, typename U>
 void attack(M monster, U victim) {
 	//... gdy U != Sheriff<T>
+
 }
 
 template <typename M, typename T>
