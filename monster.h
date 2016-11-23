@@ -49,14 +49,14 @@ public:
 };
 
 template <typename M, typename U>
-void attack(M monster, U victim) {
-	//... gdy U != Sheriff<T>
-
+void attack(M &monster, U &victim) {
+	victim.takeDamage(monster.getAttackPower());
 }
 
 template <typename M, typename T>
-void attack(M monster, Sheriff<T> sheriff) {
-	// gdy U == sheriff
+void attack(M &monster, Sheriff<T> &sheriff) {
+	monster.takeDamage(sheriff.getAttackPower());
+	sheriff.takeDamage(	monster.getAttackPower());
 }
 
 #endif /* __MONSTER_H__ */

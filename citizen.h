@@ -1,54 +1,59 @@
 #ifndef __CITIZEN_H__
 #define __CITIZEN_H__
 
-
 #include <algorithm>
+#include <cassert>
+
 
 template <typename T, typename... >
 class Citizen {
-// Moze zrobic protected, jezeli by byla potrzeba uzycia w podklasach (?)
 private:
 	T _health, _age;
 public:
-	T getHealth() {
+	Citizen(T health, T age) :
+		_health(health),
+		_age(age) {}
+
+	T getHealth() const {
 		return _health;
 	}
-	T getAge() {
+	T getAge() const {
 		return _age;
 	}
 	void takeDamage(T damage) {
-		_health = std::max(_health - damage, 0);
+		_health = std::max<T>(_health - damage, 0);
 	}
 };
 
 template <typename T>
-class Adult {
+class Adult : public Citizen<T> {
 public:
 	Adult(T health, T age) :
 		Citizen<T>(health, age) {
-		static_assert(18 <= age && age <= 100, "Invalid age");
+		assert(18 <= age && age <= 100);
 	}
 };
 
 template <typename T>
-class Teenager {
+class Teenager : public Citizen<T> {
 public:
 	Teenager(T health, T age) :
 		Citizen<T>(health, age) {
-		static_assert(11 < age && age <= 17, "Invalid age");
+		assert(11 < age && age <= 17);
 	}
 };
 
 template <typename T>
-class Sheriff {
+class Sheriff : public Citizen<T> {
 private:
 	T _attackPower;
 public:
 	Sheriff(T health, T age, T attackPower) :
+		Citizen<T>(health, age),
 		_attackPower(attackPower) {
-		static_assert(18 <= age && age <= 100, "Invalid age");
+		assert(18 <= age && age <= 100);
 	}
-	T getAttackPower() {
+	T getAttackPower() const{
 		return _attackPower;
 	}
 };
