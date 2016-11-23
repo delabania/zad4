@@ -2,6 +2,7 @@
 #define __MONSTER_H__
 
 #include <algorithm>
+#include "citizen.h"
 
 //TODO: valueType, void attack<M,U>
 
@@ -23,6 +24,7 @@ public:
 	void takeDamage(T damage) {
 		_health -= std::min(damage, _health);
 	}
+	// valueType - cos z decltype? 
 };
 
 template <typename T>
@@ -45,5 +47,15 @@ public:
 	Mummy(T health, T attackPower) :
 		Monster<T>(health, attackPower) {}
 };
+
+template <typename M, typename U>
+void attack(M monster, U victim) {
+	//... gdy U != Sheriff<T>
+}
+
+template <typename M, typename T>
+void attack(M monster, Sheriff<T> sheriff) {
+	// gdy U == sheriff
+}
 
 #endif /* __MONSTER_H__ */
