@@ -4,17 +4,18 @@
 
 using namespace std;
 
-void test1();
+void test_attack_victim();
+void test_attack_sheriff();
 
 int main() {
 	Monster<int> m = Vampire<int>(10, 12);
-	test1();
+	test_attack_victim();
+	test_attack_sheriff();
 }
 
-void test1() {
+void test_attack_victim() {
 	Adult<int> a(50, 18);
 	Teenager<float> t(11.5f, 12.23f);
-	Sheriff<int> s(100, 45, 5);
 	Zombie<int> z(10, 5);
 	Vampire<float> v(20, 50);
 	Mummy<int> m(19, 20);
@@ -28,5 +29,7 @@ void test1() {
 	assert(a.getHealth() == 0);
 	attack(z, t);
 	assert(t.getHealth() == 6.5f);
+}
+void test_attack_sheriff() {
 	//TODO: sheriff test
 }
