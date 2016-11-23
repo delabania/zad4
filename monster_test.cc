@@ -8,7 +8,6 @@ void test_attack_victim();
 void test_attack_sheriff();
 
 int main() {
-	Monster<int> m = Vampire<int>(10, 12);
 	test_attack_victim();
 	test_attack_sheriff();
 }
