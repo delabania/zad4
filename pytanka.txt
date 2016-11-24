@@ -1,0 +1,23 @@
+PYTANIA I TODO:
+
+Kodzik bardzo ladny jak tak pacze 
+
+1. konstruktory mosnter i citizen, czemu konstruktory na zdefiniowane parametry, a nie a'la variadic typenames
+template <typename T, typename... args>
+Monster(T health, T attackPower, args ...) potem nic nie zmieniasz
+
+2. _health = std::max<T>(_health - damage, 0);
+jak beda nie porownywalne to sie wysypie przy comipile time czy run time? musi przy compile time
+
+3. z tym valueType to pytanie warte forum, jaka reprezentacje powinniśmy trzymac
+ale patrzac przez pryzmat zwracania w miescie to string bedzie sponio moim zdaniem
+
+4. co do kontenera to vector podstawowo? (czy cos innego miales na mysli)
+no i jeśli vector to możemy spisac mieszkancow przy intializer list
+jak nie to jedyne co znalazlem to rekturencyjnie sobie wybierac po jednym mieszkancu :D
+
+5. chyba nie do konca rozumiem zasade działania zegara miastowego
+mamy t0 ktory idzie sobie na podstawie timeStep,
+jeśli trafi na aktualna liczbe fibbonaciego to potwor atakuje
+jak nie to idze sobie dalej czas o timeStep nowy o ile nie przekroczy t1,
+jak przekroczy t1 to t0 sie zeruje i zacykla
