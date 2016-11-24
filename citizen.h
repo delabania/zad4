@@ -12,7 +12,9 @@ private:
 public:
 	Citizen(T health, T age) :
 		_health(health),
-		_age(age) {}
+		_age(age) {
+			assert(health >= 0 && age >= 0);
+		}
 
 	T getHealth() const {
 		return _health;
@@ -21,6 +23,7 @@ public:
 		return _age;
 	}
 	void takeDamage(T damage) {
+		assert(damage >= 0);
 		_health = std::max<T>(_health - damage, 0);
 	}
 };
@@ -51,6 +54,7 @@ public:
 	Sheriff(T health, T age, T attackPower) :
 		Citizen<T>(health, age),
 		_attackPower(attackPower) {
+		assert(attackPower >= 0);
 		assert(18 <= age && age <= 100);
 	}
 	T getAttackPower() const{

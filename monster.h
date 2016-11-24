@@ -16,6 +16,7 @@ public:
 	Monster(T health, T attackPower) :
 		_health(health),
 		_attackPower(attackPower) {
+			assert(health >= 0 && attackPower >= 0);
 			valueType = typeid(T).name();
 		}
 
@@ -26,6 +27,7 @@ public:
 		return _attackPower;
 	}
 	void takeDamage(T damage) {
+		assert(damage >= 0);
 		_health = std::max<T>(_health - damage, 0);
 	}
 	// valueType - cos z decltype? 
