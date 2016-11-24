@@ -31,4 +31,30 @@ void test_attack_victim() {
 }
 void test_attack_sheriff() {
 	//TODO: sheriff test
+	Sheriff<int> s(50, 20, 10);
+	Zombie<int> z(10, 5);
+	Vampire<float> v(20, 10);
+	Mummy<int> m(40, 8);
+	attack(z, s);
+	assert(z.getHealth() == 0 && s.getHealth() == 45);
+	attack(z, s);
+	assert(z.getHealth() == 0 && s.getHealth() == 40);
+	attack(v, s);
+	assert(v.getHealth() == 10 && s.getHealth() == 30);
+	attack(m, s);
+	assert(m.getHealth() == 30 && s.getHealth() == 22);
+	attack(m, s);
+	assert(m.getHealth() == 20 && s.getHealth() == 14);
+	attack(m, s);
+	assert(m.getHealth() == 10 && s.getHealth() == 6);
+	attack(m, s);
+	assert(m.getHealth() == 0 && s.getHealth() == 0);
 }
+
+
+
+
+
+
+
+
