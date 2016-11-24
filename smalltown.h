@@ -4,6 +4,8 @@
 #include <string>
 #include <tuple>
 #include <cstddef>
+#include "citizen.h"
+#include "monster.h"
 
 namespace {
 	//TODO: constexpr na liczby Fibonacciego
@@ -15,10 +17,22 @@ template <typename M, typename U, U t0, U t1, typename... C>
 class SmallTown {
 private:
 	//TODO
-	//kontener na mieszkancow o rozmiarze sizeof...(C) 
+	// potwor
+	M _monster;
+	// Wektor zywych mieszkancow 
+	// pytanie czy w ten sposob nie stracimy informacji 
+	// o tym kto jest szeryfem przy przeladowaniu attack()...
+	vector<Citizen> _citizens; 
 public:
-	SmallTown(M monster, C... citizens);
-	std::tuple<std::string, T, size_t> & getStatus();
+	SmallTown(M monster, C... citizens) {
+
+	}
+
+	std::tuple<std::string, T, size_t> & getStatus() {
+		//std::string = m.valueType;
+		//T = m.getHealth()
+		//size_t = _citizens.size()
+	}
 	void tick(U timeStep);
 };
 

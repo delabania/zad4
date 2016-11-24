@@ -1,6 +1,9 @@
 #include <iostream>
-#include "monster.h"
 #include <cassert>
+#include <vector>
+#include <string>
+
+#include "monster.h"
 
 using namespace std;
 
@@ -64,8 +67,21 @@ void test_valueType() {
 	//std::cout << z.valueType <<  " " << v.valueType <<
 	//          " " << m2.valueType << std::endl;
 }
+/*
+void test_notArithmeticType() {
+	//Nie powinno sie skompilowac
+	Zombie<vector<int>> z({10, 2}, {5, 3});
+	Zombie<int *> x(NULL, NULL);
+	Teenager<std::string> o("as", "jefiq");
+} */
 
-
+void test_takeDamage() {
+	Zombie<int> z(10, 5);
+	vector<int> x = {1};
+	z.takeDamage(x);
+	int * y = NULL;
+	z.takeDamage(y);
+}
 
 
 

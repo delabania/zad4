@@ -6,9 +6,9 @@
 #include <typeinfo>
 #include "citizen.h"
 
-//TODO: valueType, void attack<M,U>
 
-template <typename T, typename... >
+template <typename T, typename =
+          typename std::enable_if<std::is_arithmetic<T>::value, T>::type>
 class Monster {
 private:
 	T _health, _attackPower;
@@ -16,9 +16,9 @@ public:
 	Monster(T health, T attackPower) :
 		_health(health),
 		_attackPower(attackPower) {
-			assert(health >= 0 && attackPower >= 0);
-			valueType = typeid(T).name();
-		}
+		assert(health >= 0 && attackPower >= 0);
+		valueType = typeid(T).name();
+	}
 
 	T getHealth() const {
 		return _health;
@@ -30,7 +30,7 @@ public:
 		assert(damage >= 0);
 		_health = std::max<T>(_health - damage, 0);
 	}
-	// valueType - cos z decltype? 
+
 	std::string valueType;
 };
 

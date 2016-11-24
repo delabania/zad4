@@ -5,7 +5,8 @@
 #include <cassert>
 
 
-template <typename T, typename... >
+template <typename T, typename =
+          typename std::enable_if<std::is_arithmetic<T>::value, T>::type>
 class Citizen {
 private:
 	T _health, _age;
@@ -13,8 +14,8 @@ public:
 	Citizen(T health, T age) :
 		_health(health),
 		_age(age) {
-			assert(health >= 0 && age >= 0);
-		}
+		assert(health >= 0 && age >= 0);
+	}
 
 	T getHealth() const {
 		return _health;
@@ -57,7 +58,7 @@ public:
 		assert(attackPower >= 0);
 		assert(18 <= age && age <= 100);
 	}
-	T getAttackPower() const{
+	T getAttackPower() const {
 		return _attackPower;
 	}
 };
