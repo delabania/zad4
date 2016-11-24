@@ -6,10 +6,12 @@ using namespace std;
 
 void test_attack_victim();
 void test_attack_sheriff();
+void test_valueType();
 
 int main() {
 	test_attack_victim();
 	test_attack_sheriff();
+	test_valueType();
 }
 
 void test_attack_victim() {
@@ -51,6 +53,17 @@ void test_attack_sheriff() {
 	assert(m.getHealth() == 0 && s.getHealth() == 0);
 }
 
+void test_valueType() {
+	Zombie<int> z(10, 5);
+	Vampire<float> v(20, 50);
+	Mummy<int> m(19, 20);
+	Mummy<short> m2(1, 1);
+	assert(z.valueType == m.valueType);
+	assert(z.valueType != v.valueType);
+	assert(m.valueType != m2.valueType);
+	//std::cout << z.valueType <<  " " << v.valueType <<
+	//          " " << m2.valueType << std::endl;
+}
 
 
 

@@ -2,6 +2,8 @@
 #define __MONSTER_H__
 
 #include <algorithm>
+#include <string>
+#include <typeinfo>
 #include "citizen.h"
 
 //TODO: valueType, void attack<M,U>
@@ -13,7 +15,9 @@ private:
 public:
 	Monster(T health, T attackPower) :
 		_health(health),
-		_attackPower(attackPower) {}
+		_attackPower(attackPower) {
+			valueType = typeid(T).name();
+		}
 
 	T getHealth() const {
 		return _health;
@@ -25,6 +29,7 @@ public:
 		_health = std::max<T>(_health - damage, 0);
 	}
 	// valueType - cos z decltype? 
+	std::string valueType;
 };
 
 template <typename T>
