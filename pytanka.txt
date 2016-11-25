@@ -29,6 +29,8 @@ jak nie to jedyne co znalazlem to rekturencyjnie sobie wybierac po jednym mieszk
 
 Ad 4:
 Nie za bardzo wiem jak to powinno wygladac, w sensie póki co nie mam pomyslu jak reprezentowac tych mieszkancow. Z vector<Citizen> jest taki problem, ze jezli zrobimy {Sheriff s(); Citizen c = s(); Zombie z(); attack(z,c);} to wywola sie metoda attack na zwyklym mieszkancu a nie na szeryfie. Trzeba jakos trzymac informacje o typie, ale nie za bardzo wiem jak to zrobic poki co - mozesz pomyslec, ja pewnie dopiero w sobote sie do tego z powrotem zabiore, bo pt mam raczej zawalony :P
+//W tuple jest sporo sposobów i rpzepisanie parametrów ale może da sie łatwiej
+
 
 5. chyba nie do konca rozumiem zasade działania zegara miastowego
 mamy t0 ktory idzie sobie na podstawie timeStep,
@@ -38,4 +40,7 @@ jak przekroczy t1 to t0 sie zeruje i zacykla
 
 
 Ad 5:
-To jest chyba tak, ze zegar sobie dziala (mod t1), zaczynajac od t0 i jezeli aktualny czas (mod t1) = Fibb(i) to jest atak.
+To jest chyba tak, ze zegar sobie dziala (mod t1), zaczynajac od t0 i jezeli aktualny czas (mod t1) = Fibb(i) to jest atak. 
+// TAK, dobrze :D to sporo upraszaszcza, jedyna trudnosc to trzymanie fibonnacich, ale sa jakiś oszukstwa
+
+6. do zapamietanie specjalizacje
