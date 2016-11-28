@@ -17,7 +17,7 @@ public:
 		_age(age)
 	{
 		static_assert(!canAttack, "a");
-		static_assert((ageMin <= age && age <= ageMax), "a");
+		assert(ageMin <= age && age <= ageMax);
 		assert(health >= 0);
 	}
 
@@ -52,7 +52,7 @@ public:
 		_age(age),
 		_attackPower(attackPower)
 	{
-		static_assert((18 <= age && age <= 100), "a");
+		assert(18 <= age && age <= 100);
 		assert(health >= 0);
 	}
 
