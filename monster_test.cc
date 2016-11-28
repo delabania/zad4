@@ -3,20 +3,22 @@
 #include <vector>
 #include <string>
 
-#include "monster.h"
+//#include "monster.h"
+#include "citizen.h"
 
 using namespace std;
+
 
 void test_attack_victim();
 void test_attack_sheriff();
 void test_valueType();
 
 int main() {
-	test_attack_victim();
-	test_attack_sheriff();
-	test_valueType();
+	//test_attack_victim();
+	//test_attack_sheriff();
+	//test_valueType();
 }
-
+/*
 void test_attack_victim() {
 	Adult<int> a(50, 18);
 	Teenager<float> t(11.5f, 12.23f);
@@ -67,13 +69,13 @@ void test_valueType() {
 	//std::cout << z.valueType <<  " " << v.valueType <<
 	//          " " << m2.valueType << std::endl;
 }
-/*
+
 void test_notArithmeticType() {
 	//Nie powinno sie skompilowac
 	Zombie<vector<int>> z({10, 2}, {5, 3});
 	Zombie<int *> x(NULL, NULL);
 	Teenager<std::string> o("as", "jefiq");
-} */
+}
 
 void test_takeDamage() {
 	Zombie<int> z(10, 5);
@@ -81,7 +83,7 @@ void test_takeDamage() {
 	z.takeDamage(x);
 	int * y = NULL;
 	z.takeDamage(y);
-}
+}*/
 
 
 

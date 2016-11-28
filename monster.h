@@ -7,8 +7,8 @@
 #include "citizen.h"
 
 
-template <typename T, typename =
-          typename std::enable_if<std::is_arithmetic<T>::value, T>::type>
+template <typename T, 
+ typename = typename std::enable_if<std::is_arithmetic<T>::value, T>::type>
 class Monster {
 private:
 	T _health, _attackPower;
@@ -33,27 +33,13 @@ public:
 
 	std::string valueType;
 };
-
 template <typename T>
-class Zombie : public Monster<T> {
-public:
-	Zombie(T health, T attackPower) :
-		Monster<T>(health, attackPower) {}
-};
-
+using Zombie = Monster<T>;
 template <typename T>
-class Vampire : public Monster<T> {
-public:
-	Vampire(T health, T attackPower) :
-		Monster<T>(health, attackPower) {}
-};
+using Vampire = Monster<T>;
+template <typename T> 
+using Mummy = Monster<T>;
 
-template <typename T>
-class Mummy : public Monster<T> {
-public:
-	Mummy(T health, T attackPower) :
-		Monster<T>(health, attackPower) {}
-};
 
 template <typename M, typename U>
 void attack(M &monster, U &victim) {
