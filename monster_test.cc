@@ -14,9 +14,9 @@ void test_attack_sheriff();
 void test_valueType();
 
 int main() {
-	//test_attack_victim();
-	//test_attack_sheriff();
-	//test_valueType();
+	test_attack_victim();
+	test_attack_sheriff();
+	test_valueType();
 }
 void test_attack_victim() {
 	Adult<int> a(50, 18);
@@ -70,6 +70,7 @@ void test_valueType() {
 }
 
 
+/*
 void test_notArithmeticType() {
 	//Nie powinno sie skompilowac
 	Zombie<vector<int>> z({10, 2}, {5, 3});
@@ -84,8 +85,7 @@ void test_takeDamage() {
 	int * y = NULL;
 	z.takeDamage(y);
 }
-
-
+*/
 
 
 
