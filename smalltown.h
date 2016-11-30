@@ -55,31 +55,32 @@ class SmallTown {
         
         void tick(U timeStep) {
             bool annihilationTime = false;
-            U steppedTime = (_currentTime + timeStep)%_cycleTimer;
             
             for (auto &in : _fibbonacciArray) {
-                if (in == steppedTime) annihilationTime = true; 
+                if (in == _currentTime) annihilationTime = true; 
             }
             
             if (annihilationTime) 
                 attackAll();
+                
+            _currentTime = (_currentTime + timeStep)%_cycleTimer;
         };
         
         private:
             void attackAll() {
-                //for_each(_citizens, unpacker{});
+                //for_each(_citizens, unpacker{}); i przy okazji obniza liczbe mieszkancow
                 
                 if(_alive == 0) {
                     if (_monster.getHealth() == 0) {
                         std::cout << "DRAW";
                     } else {
-                        std::cout << "CITIZENS WON";
+                        std::cout << "MONSTER WON";
                     }
                 } else {
                     if (_monster.getHealth() == 0) {
                         std::cout << "DRAW";
                     } else {
-                        std::cout << "MONSTER WON";
+                        std::cout << "CITIZENS WON";
                     }
                 }
             }
