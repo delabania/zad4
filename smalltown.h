@@ -106,6 +106,7 @@ class SmallTown {
             }
 };
 
+
 template <typename M, typename U, U t0, U t1, typename...C>
 constexpr unsigned SmallTown<M, U, t0, t1, C...>::_sizeOfArray;
 
