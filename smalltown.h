@@ -13,16 +13,7 @@
 
 namespace {
     //for tuple
-    template<class F, class...Ts, std::size_t...Is>
-    void for_each_in_tuple(const std::tuple<Ts...> & tuple, F func, std::index_sequence<Is...>){
-        using expander = int[];
-        (void)expander { 0, ((void)func(std::get<Is>(tuple)), 0)... };
-    }
-
-    template<class F, class...Ts>
-    void for_each_in_tuple(const std::tuple<Ts...> & tuple, F func){
-        for_each_in_tuple(tuple, func, std::make_index_sequence<sizeof...(Ts)>());
-    }
+    
     
     //for fibbo
     constexpr unsigned giveDesiredFibbonacci(unsigned index) {
@@ -40,7 +31,7 @@ namespace {
     }
 }
 
-template <typename M, typename U, U t0, U t1, typename... C> //C same sie sprawdza czy dobre typy
+template <typename M, typename U, U t0, U t1, typename... C>
 class SmallTown {
     private:
         static constexpr unsigned _sizeOfArray = giveFibArraySize((unsigned)t1, 0);
@@ -76,7 +67,21 @@ class SmallTown {
         
         private:
             void attackAll() {
-                for_each_in_tuple(_citizens, [](const auto &x) { x.takeDamage(10); });
+                //for_each(_citizens, unpacker{});
+                
+                if(_alive == 0) {
+                    if (_monster.getHealth() == 0) {
+                        std::cout << "DRAW";
+                    } else {
+                        std::cout << "CITIZENS WON";
+                    }
+                } else {
+                    if (_monster.getHealth() == 0) {
+                        std::cout << "DRAW";
+                    } else {
+                        std::cout << "MONSTER WON";
+                    }
+                }
             }
 };
 
