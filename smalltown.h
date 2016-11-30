@@ -14,12 +14,12 @@
 
 namespace {
     constexpr unsigned giveDesiredFibbonacci(unsigned index) {
-        return index <= 1 ? 1 : giveDesiredFibbonacci(index - 2) +
+        return (index <= 1) ? 1 : giveDesiredFibbonacci(index - 2) +
             giveDesiredFibbonacci(index - 1);
     }
 
     constexpr unsigned giveFibArraySize(unsigned maxNumber, unsigned index) {
-        return giveDesiredFibbonacci(index) > maxNumber ?
+        return (giveDesiredFibbonacci(index) > maxNumber) ?
             index : giveFibArraySize(maxNumber, index + 1);
     }
 
@@ -62,7 +62,8 @@ class SmallTown {
         }
             
         auto getStatus() {
-            return std::make_tuple(_monster.valueType, _monster.getHealth(), _alive);
+            return std::make_tuple(_monster.getValueType(),
+                _monster.getHealth(), _alive);
         }
         
         void tick(U timeStep) {
