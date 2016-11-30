@@ -12,6 +12,19 @@
 #include <tuple>
 
 namespace {
+    //for tuple
+    template<class F, class...Ts, std::size_t...Is>
+    void for_each_in_tuple(const std::tuple<Ts...> & tuple, F func, std::index_sequence<Is...>){
+        using expander = int[];
+        (void)expander { 0, ((void)func(std::get<Is>(tuple)), 0)... };
+    }
+
+    template<class F, class...Ts>
+    void for_each_in_tuple(const std::tuple<Ts...> & tuple, F func){
+        for_each_in_tuple(tuple, func, std::make_index_sequence<sizeof...(Ts)>());
+    }
+    
+    //for fibbo
     constexpr unsigned giveDesiredFibbonacci(unsigned index) {
         return index <= 1 ? 1 : giveDesiredFibbonacci(index - 2) +
             giveDesiredFibbonacci(index - 1);
@@ -22,7 +35,7 @@ namespace {
     }
 
     template <unsigned...args>
-    constexpr std::array <unsigned, sizeof...(args)> giveArray(std::integer_sequence<unsigned,args...>) {
+    constexpr std::array <unsigned, sizeof...(args)> giveArray(std::integer_sequence<unsigned, args...>) {
         return std::array <unsigned, sizeof...(args)> {{giveDesiredFibbonacci(args)...}};
     }
 }
@@ -49,12 +62,6 @@ class SmallTown {
             return std::make_tuple(_monster.valueType, _monster.getHealth(), _alive);
         }
         
-        void TESTOWEprntfib() { //TODO: do usuniecia
-            for(auto &in : _fibbonacciArray) {
-                std::cout << in << " ";
-            }
-        }
-        
         void tick(U timeStep) {
             bool annihilationTime = false;
             U steppedTime = (_currentTime + timeStep)%_cycleTimer;
@@ -69,7 +76,7 @@ class SmallTown {
         
         private:
             void attackAll() {
-                
+                for_each_in_tuple(_citizens, [](const auto &x) { x.takeDamage(10); });
             }
 };
 
