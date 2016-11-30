@@ -28,6 +28,11 @@ public:
 	T getAge() const {
 		return _age;
 	}
+    
+    bool isAggresive() {
+        return canAttack;
+    }
+    
 	void takeDamage(T damage) {
 		assert(damage >= 0);
 		_health = std::max<T>(_health - damage, 0);
@@ -65,6 +70,10 @@ public:
 	T getAttackPower() const {
 		return _attackPower;
 	}
+
+    //bool isAggresive() {
+        //return canAttack;
+    //}
 
 	void takeDamage(T damage) {
 		assert(damage >= 0);

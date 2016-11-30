@@ -12,7 +12,8 @@
 #include <tuple>
 
 namespace {
-    //for tuple
+    //nie wiem czy dobrze tego tupla tutaj umiescilem i jak sie dobierac w takim razie do szeryfow?
+    //http://stackoverflow.com/questions/1198260/iterate-over-tuple
     
     
     //for fibbo
@@ -67,20 +68,39 @@ class SmallTown {
         };
         
         private:
+            template<std::size_t Index, typename... Tupl>
+            inline typename std::enable_if<Index == sizeof...(Tupl), void>::type
+            attAll(std::tuple<Tupl...>& current) { }
+
+            template<std::size_t Index, typename... Tupl>
+            inline typename std::enable_if<Index < sizeof...(Tupl), void>::type
+            attAll(std::tuple<Tupl...>& current) {
+                auto currentCitizen = std::get<Index>(current);
+                auto currentHealth = currentCitizen.getHealth();
+                currentCitizen.takeDamage(_monster.getAttackPower());
+
+                if(currentCitizen.getHealth() == 0 && currentCitizen.getHealth() != currentHealth)
+                    _alive--;
+                //if(currentCitizen.isAggresive())
+                    //_monster.takeDamage(currentCitizen.getAttackPower());
+
+                attAll<Index + 1, Tupl...>(current);
+            }
+            
             void attackAll() {
-                //for_each(_citizens, unpacker{}); i przy okazji obniza liczbe mieszkancow
+                attAll<0, C...>(_citizens);
                 
                 if(_alive == 0) {
                     if (_monster.getHealth() == 0) {
-                        std::cout << "DRAW";
+                        std::cout << "DRAW" << std::endl;
                     } else {
-                        std::cout << "MONSTER WON";
+                        std::cout << "MONSTER WON" << std::endl;
                     }
                 } else {
                     if (_monster.getHealth() == 0) {
-                        std::cout << "DRAW";
+                        std::cout << "DRAW" << std::endl;
                     } else {
-                        std::cout << "CITIZENS WON";
+                        std::cout << "CITIZENS WON" << std::endl;
                     }
                 }
             }
