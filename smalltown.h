@@ -81,6 +81,18 @@ class SmallTown {
             
             if (annihilationTime) 
                 attackAll();
+
+            if(_alive == 0) {
+                if (_monster.getHealth() == 0) {
+                    std::cout << "DRAW" << std::endl;
+                } else {
+                    std::cout << "MONSTER WON" << std::endl;
+                }
+            } else {
+                if (_monster.getHealth() == 0) {
+                    std::cout << "CITIZENS WON" << std::endl;
+                }
+            }
             
             _currentTime = (_currentTime + timeStep)%_cycleTimer;
         };
@@ -102,11 +114,11 @@ class SmallTown {
         }
         
         template<std::size_t Index, typename...Tupl>
-        typename std::enable_if<Index == sizeof...(Tupl), void>::type
+        inline typename std::enable_if<Index == sizeof...(Tupl), void>::type
         attAll(std::tuple<Tupl...>& current) {}
 
         template<std::size_t Index, typename...Tupl>
-        typename std::enable_if<Index<sizeof...(Tupl), void>::type
+        inline typename std::enable_if<Index<sizeof...(Tupl), void>::type
         attAll(std::tuple<Tupl...>& current) {
             auto currentHealth = std::get<Index>(current).getHealth();
 
@@ -121,18 +133,6 @@ class SmallTown {
         void attackAll() {
             if (_monster.getHealth() != 0)
                 attAll<0, C...>(_citizens);
-            
-            if(_alive == 0) {
-                if (_monster.getHealth() == 0) {
-                    std::cout << "DRAW" << std::endl;
-                } else {
-                    std::cout << "MONSTER WON" << std::endl;
-                }
-            } else {
-                if (_monster.getHealth() == 0) {
-                    std::cout << "CITIZENS WON" << std::endl;
-                }
-            }
         }
 };
 
