@@ -74,13 +74,6 @@ class SmallTown {
         
         void tick(U timeStep) {
             bool annihilationTime = false;
-            
-            for (auto &in : _fibbonacciArray) {
-                if (in == _currentTime) annihilationTime = true; 
-            }
-            
-            if (annihilationTime) 
-                attackAll();
 
             if(_alive == 0) {
                 if (_monster.getHealth() == 0) {
@@ -94,6 +87,13 @@ class SmallTown {
                 }
             }
             
+            for (auto &in : _fibbonacciArray) {
+                if (in == _currentTime) annihilationTime = true; 
+            }
+            
+            if (annihilationTime) 
+                attackAll();
+                
             _currentTime = (_currentTime + timeStep)%_cycleTimer;
         };
         
