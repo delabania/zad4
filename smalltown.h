@@ -78,6 +78,7 @@ class SmallTown {
             
             if (annihilationTime) 
                 attackAll();
+            
                 
             _currentTime = (_currentTime + timeStep)%_cycleTimer;
         };
@@ -116,7 +117,8 @@ class SmallTown {
         }
         
         void attackAll() {
-            attAll<0, C...>(_citizens);
+            if (_monster.getHealth() != 0)
+                attAll<0, C...>(_citizens);
             
             if(_alive == 0) {
                 if (_monster.getHealth() == 0) {
