@@ -13,20 +13,22 @@
 #include "monster.h"
 
 namespace {
-    constexpr unsigned giveDesiredFibbonacci(unsigned index) {
+    using bigpositive = unsigned long long;
+    
+    constexpr bigpositive giveDesiredFibbonacci(bigpositive index) {
         return (index <= 1) ? 1 : giveDesiredFibbonacci(index - 2) +
             giveDesiredFibbonacci(index - 1);
     }
 
-    constexpr unsigned giveFibArraySize(unsigned maxNumber, unsigned index) {
+    constexpr bigpositive giveFibArraySize(bigpositive maxNumber, bigpositive index) {
         return (giveDesiredFibbonacci(index) > maxNumber) ?
             index : giveFibArraySize(maxNumber, index + 1);
     }
 
-    template <unsigned...args>
-    constexpr std::array <unsigned, sizeof...(args)>
-    giveArray(std::integer_sequence<unsigned, args...>) {
-        return std::array <unsigned, sizeof...(args)> {{giveDesiredFibbonacci(args)...}};
+    template <bigpositive...args>
+    constexpr std::array <bigpositive, sizeof...(args)>
+    giveArray(std::integer_sequence<bigpositive, args...>) {
+        return std::array <bigpositive, sizeof...(args)> {{giveDesiredFibbonacci(args)...}};
     }
 
 
@@ -45,14 +47,14 @@ namespace {
 template <typename M, typename U, U t0, U t1, typename... C>
 class SmallTown {
     private:
-        static constexpr unsigned _sizeOfArray = giveFibArraySize((unsigned)t1, 0);
-        static constexpr std::array<unsigned, _sizeOfArray> _fibbonacciArray =
-            giveArray(std::make_integer_sequence<unsigned, _sizeOfArray>{});
+        static constexpr bigpositive _sizeOfArray = giveFibArraySize((bigpositive)t1, 0);
+        static constexpr std::array<bigpositive, _sizeOfArray> _fibbonacciArray =
+            giveArray(std::make_integer_sequence<bigpositive, _sizeOfArray>{});
         U _currentTime;
         U _cycleTimer;
         M _monster;
         std::tuple<C...> _citizens;
-        unsigned _alive;
+        bigpositive _alive;
     public:
         constexpr SmallTown(M monster, C... citizens) :
            _currentTime(t0), _cycleTimer(t1), _monster(monster),
@@ -134,9 +136,9 @@ class SmallTown {
 
 
 template <typename M, typename U, U t0, U t1, typename...C>
-constexpr unsigned SmallTown<M, U, t0, t1, C...>::_sizeOfArray;
+constexpr bigpositive SmallTown<M, U, t0, t1, C...>::_sizeOfArray;
 
 template <typename M, typename U, U t0, U t1, typename...C>
-constexpr std::array<unsigned, SmallTown<M, U, t0, t1, C...>::_sizeOfArray> SmallTown<M, U, t0, t1, C...>::_fibbonacciArray;
+constexpr std::array<bigpositive, SmallTown<M, U, t0, t1, C...>::_sizeOfArray> SmallTown<M, U, t0, t1, C...>::_fibbonacciArray;
 
 #endif /* __SMALLTOWN_H__ */
