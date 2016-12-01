@@ -126,8 +126,6 @@ class SmallTown {
                 }
             } else {
                 if (_monster.getHealth() == 0) {
-                    std::cout << "DRAW" << std::endl;
-                } else {
                     std::cout << "CITIZENS WON" << std::endl;
                 }
             }
