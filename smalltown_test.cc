@@ -12,6 +12,8 @@ using namespace std;
 void test1();
 void test2();
 void test3();
+void test4();
+void test5();
 
 int main() {
 
@@ -21,6 +23,10 @@ int main() {
 	test2();
 	cout << "test3:" << endl;
 	test3();
+	cout << "test4:" << endl;
+	test4();
+	cout << "test5:" << endl;
+	test5();
 	return 0;
 }
 
@@ -141,7 +147,7 @@ void test2() {
 // DRAW
 void test3() {
 	auto smallTown = SmallTown<Vampire<int>, int, 1, 100, Adult<int>, Sheriff<int> > (
-	                     Vampire<int>(10, 1), Adult<int>(5, 5), Sheriff<int>(10, 20, 1)
+	                     Vampire<int>(10, 1), Adult<int>(5, 25), Sheriff<int>(10, 20, 1)
 	                 );
 
 	smallTown.tick(1); // 1->2
@@ -205,10 +211,39 @@ void test3() {
 	assert(get<2>(status) == 0);
 	// (0, 0, 0)
 
-	smallTown.tick(129);
+	smallTown.tick(129); //wypisz DRAW
 	assert(get<1>(status) == 0);
 	assert(get<2>(status) == 0);
+}
 
+// brak Citizenow
+void test4() {
+	auto smallTown = SmallTown<Zombie<int>, int, 10, 12> (Zombie<int>(10, 10));
+	auto status = smallTown.getStatus();
+	assert(get<2>(status) == 0);
+	smallTown.tick(1);
+}
 
+//dwoch szeryfow, CITIZEN won
+void test5() {
+	auto smallTown = SmallTown<Zombie<int>, int, 4, 12, Sheriff<int>, Sheriff<long long> >(
+	                     Zombie<int>(10, 10), Sheriff<int>(20, 20, 5), Sheriff<long long>(10, 100, 5));
+
+	auto status = smallTown.getStatus();
+	smallTown.tick(2); // 4->6
+	assert(get<1>(status) == 10);
+	assert(get<2>(status) == 2);
+	smallTown.tick(2); // 6-> 8
+	status = smallTown.getStatus();
+	assert(get<1>(status) == 10);
+	assert(get<2>(status) == 2);
+	// atak bo time=8
+	smallTown.tick(1200); // 8->1208
+	status = smallTown.getStatus();
+	//cout << get<1>(status);
+	assert(get<1>(status) == 0);
+	assert(get<2>(status) == 1);
+	smallTown.tick(100); // CITIZEN won
+	smallTown.tick(100); // CITIZEN won
 
 }
