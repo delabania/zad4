@@ -100,17 +100,17 @@ class SmallTown {
         }
         
         template<std::size_t Index, typename...Tupl>
-        inline typename std::enable_if<Index == sizeof...(Tupl), void>::type
+        typename std::enable_if<Index == sizeof...(Tupl), void>::type
         attAll(std::tuple<Tupl...>& current) {}
 
         template<std::size_t Index, typename...Tupl>
-        inline typename std::enable_if<Index<sizeof...(Tupl), void>::type
+        typename std::enable_if<Index<sizeof...(Tupl), void>::type
         attAll(std::tuple<Tupl...>& current) {
-            auto currentCitizen = std::get<Index>(current);
-            auto currentHealth = currentCitizen.getHealth();
-            fight(_monster, currentCitizen);
+            auto currentHealth = std::get<Index>(current).getHealth();
 
-            if(currentCitizen.getHealth() == 0 && currentCitizen.getHealth() != currentHealth)
+            fight(_monster, std::get<Index>(current));
+
+            if(std::get<Index>(current).getHealth() == 0 && std::get<Index>(current).getHealth() != currentHealth) 
                 _alive--;
 
             attAll<Index + 1, Tupl...>(current);
