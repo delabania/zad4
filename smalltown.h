@@ -56,9 +56,10 @@ class SmallTown {
     public:
         constexpr SmallTown(M monster, C... citizens) :
            _currentTime(t0), _cycleTimer(t1), _monster(monster),
-           _citizens(citizens...), _alive(sizeof...(C)) {
+           _citizens(citizens...), _alive(0) {
                static_assert(std::is_integral<U>::value, "Type not arythmetic");
                static_assert((t0 >= 0) && (t1 >= 0) && (t0 < t1), "Timestamps invalid");
+               countInitialAlives<0, C...>(_citizens);
         }
             
         auto getStatus() {
@@ -82,7 +83,22 @@ class SmallTown {
     private:
         template<std::size_t Index, typename...Tupl>
         inline typename std::enable_if<Index == sizeof...(Tupl), void>::type
-        attAll(std::tuple<Tupl...>& current) { }
+        countInitialAlives(std::tuple<Tupl...>& current) {}
+
+        template<std::size_t Index, typename...Tupl>
+        inline typename std::enable_if<Index<sizeof...(Tupl), void>::type
+        countInitialAlives(std::tuple<Tupl...>& current) {
+            auto currentCitizen = std::get<Index>(current);
+
+            if(currentCitizen.getHealth() != 0)
+                _alive++;
+
+            countInitialAlives<Index + 1, Tupl...>(current);
+        }
+        
+        template<std::size_t Index, typename...Tupl>
+        inline typename std::enable_if<Index == sizeof...(Tupl), void>::type
+        attAll(std::tuple<Tupl...>& current) {}
 
         template<std::size_t Index, typename...Tupl>
         inline typename std::enable_if<Index<sizeof...(Tupl), void>::type
