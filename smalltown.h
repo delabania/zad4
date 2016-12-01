@@ -34,13 +34,16 @@ namespace {
 
     template<typename M, typename U>
     void fight(M &monster, U &citizen) {
-        citizen.takeDamage(monster.getAttackPower());
+        if(citizen.getHealth() != 0)
+            citizen.takeDamage(monster.getAttackPower());
     }
 
     template<typename M, typename T>
     void fight(M &monster, Sheriff<T> &sheriff) {
-        sheriff.takeDamage(monster.getAttackPower());
-        monster.takeDamage(sheriff.getAttackPower());
+        if (sheriff.getHealth() != 0) {
+            sheriff.takeDamage(monster.getAttackPower());
+            monster.takeDamage(sheriff.getAttackPower());
+        }
     }
 }
 
@@ -79,7 +82,6 @@ class SmallTown {
             if (annihilationTime) 
                 attackAll();
             
-                
             _currentTime = (_currentTime + timeStep)%_cycleTimer;
         };
         
