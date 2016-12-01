@@ -11,11 +11,16 @@ using namespace std;
 
 void test1();
 void test2();
+void test3();
 
 int main() {
 
-	//test1();
+	cout << "test1:" << endl;
+	test1();
+	cout << "test2:" << endl;
 	test2();
+	cout << "test3:" << endl;
+	test3();
 	return 0;
 }
 
@@ -131,20 +136,78 @@ void test2() {
 	smallTown.tick(1); // wypisanie MONSTER WON
 
 	// Powinien wypisac 12 MONSTER WON
+}
+
+// DRAW
+void test3() {
+	auto smallTown = SmallTown<Vampire<int>, int, 1, 100, Adult<int>, Sheriff<int> > (
+	                     Vampire<int>(10, 1), Adult<int>(5, 5), Sheriff<int>(10, 20, 1)
+	                 );
+
+	smallTown.tick(1); // 1->2
+	auto status = smallTown.getStatus();
+	assert(get<1>(status) == 9);
+	assert(get<2>(status) == 2);
+	// (9, 4, 9)
+
+	smallTown.tick(1); // 2->3
+	status = smallTown.getStatus();
+	assert(get<1>(status) == 8);
+	assert(get<2>(status) == 2);
+	// (8, 3, 8)
 
 
+	smallTown.tick(2); // 3->5
+	status = smallTown.getStatus();
+	assert(get<1>(status) == 7);
+	assert(get<2>(status) == 2);
+	// (7, 2, 7)
 
+	smallTown.tick(3); // 5->8
+	status = smallTown.getStatus();
+	assert(get<1>(status) == 6);
+	assert(get<2>(status) == 2);
+	// (6, 1, 6)
 
+	smallTown.tick(5); // 8->13
+	status = smallTown.getStatus();
+	assert(get<1>(status) == 5);
+	assert(get<2>(status) == 1);
+	// (5, 0, 5)
 
+	smallTown.tick(8); // 13->21
+	status = smallTown.getStatus();
+	assert(get<1>(status) == 4);
+	assert(get<2>(status) == 1);
+	// (4, 0, 4)
 
+	smallTown.tick(13); // 21->34
+	status = smallTown.getStatus();
+	assert(get<1>(status) == 3);
+	assert(get<2>(status) == 1);
+	// (3, 0, 3)
 
+	smallTown.tick(21); // 34->55
+	status = smallTown.getStatus();
+	assert(get<1>(status) == 2);
+	assert(get<2>(status) == 1);
+	// (2, 0, 2)
 
+	smallTown.tick(34); // 55->89
+	status = smallTown.getStatus();
+	assert(get<1>(status) == 1);
+	assert(get<2>(status) == 1);
+	// (1, 0, 1)
 
+	smallTown.tick(55); // 89->144
+	status = smallTown.getStatus();
+	assert(get<1>(status) == 0);
+	assert(get<2>(status) == 0);
+	// (0, 0, 0)
 
-
-
-
-
+	smallTown.tick(129);
+	assert(get<1>(status) == 0);
+	assert(get<2>(status) == 0);
 
 
 
